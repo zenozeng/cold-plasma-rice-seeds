@@ -1,0 +1,7 @@
+## Requirements
+
+- pandas
+
+- xlrd
+
+- ipython
