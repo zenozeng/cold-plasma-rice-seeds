@@ -4,4 +4,4 @@
 
 - xlrd
 
-- ipython
+- ipython (optional)
