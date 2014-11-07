@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import pandas
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 
 from mpltools import style
@@ -13,6 +14,7 @@ data_23 = pandas.io.excel.read_excel(io='data.xlsx',
 data_28 = pandas.io.excel.read_excel(io='data.xlsx',
                                      sheetname='28',
                                      index_col=0)
+
 
 # 由于初始值存在差异
 # 这里统一标准化，以初始质量为1，计算各个时间段的增长率
@@ -29,15 +31,26 @@ df_28 = data_28.apply(standardize).transpose()
 
 print(df_23)
 
-df_23.plot(kind='bar', stacked=True, alpha=1)
-df_28.plot(kind='bar', stacked=True, alpha=1)
+fig, axes = plt.subplots(nrows=1, ncols=2)
+
+mpl.rcParams['font.family'] = 'sans-serif'
+mpl.rcParams['font.sans-serif'] = 'Source Han Sans CN'
+mpl.rcParams['axes.titlesize'] = 'large'
+
+df_23.plot(ax=axes[0],
+           kind='area',
+           stacked=True,
+           alpha=0.5,
+           ylim=[0, 0.3],
+           linewidth=1.0,
+           title='浙优023')
+
+df_28.plot(ax=axes[1],
+           kind='area',
+           stacked=True,
+           alpha=0.5,
+           ylim=[0, 0.3],
+           linewidth=1.0,
+           title='津粳优028')
+
 plt.show()
-# df_28.plot(ax=ax)
-
-# plt.figure()
-# df_23.plot()
-
-# plt.figure()
-# df_28.plot()
-
-# plt.show()
